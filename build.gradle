@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'Main'
+
+group 'lcj'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'javassist:javassist:3.12.1.GA'
+    compile 'commons-io:commons-io:2.5'
+    compile 'com.squareup:javapoet:1.5.1'
+
+}
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'Main'
+        )
+    }
+}
